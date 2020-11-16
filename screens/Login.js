@@ -1,10 +1,13 @@
 import React from "react";
+import { observer } from "mobx-react-lite";
+import useUserProfile from "./../hooks/useUserProfile";
 import { View, Text } from "react-native";
 import ButtonUI from "../components/ButtonUI";
 import InputFieldUI from "../components/InputFieldUI";
 
 const Login = (props) => {
   const { navigation } = props;
+  const { auth, name } = useUserProfile();
 
   const navigateToRegister = () => {
     navigation.navigate("Register");
@@ -12,7 +15,7 @@ const Login = (props) => {
 
   return (
     <View>
-      <Text>LOGIN PAGE</Text>
+      <Text>LOGIN PAGE {name}</Text>
       <InputFieldUI />
       <InputFieldUI />
 
@@ -21,4 +24,4 @@ const Login = (props) => {
   );
 };
 
-export default Login;
+export default observer(Login);
