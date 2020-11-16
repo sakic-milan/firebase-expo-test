@@ -1,19 +1,23 @@
 import React, { useState } from "react";
 import { View, Text } from "react-native";
+
 import ButtonUI from "../components/ButtonUI";
 import InputFieldUI from "../components/InputFieldUI";
-
-import { useDispatch, useSelector } from "react-redux";
-import { login, logout } from "../store";
+import useUserProfile from "./../hooks/useUserProfile";
 
 const Register = (props) => {
   const { navigation } = props;
+  const { createAccount } = useUserProfile();
 
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleChangeUsername = (text) => {
-    setUsername(text);
+  const handleCreateAccountRequest = async () => {
+    await createAccount(email, password);
+  };
+
+  const handleChangeEmail = (text) => {
+    setEmail(text);
   };
 
   const handleChangePassword = (text) => {
@@ -29,19 +33,16 @@ const Register = (props) => {
       <Text>THIS IS REGISTRATION PAGE</Text>
 
       <InputFieldUI
-        placeholder="username"
-        value={username}
-        handleInputChange={handleChangeUsername}
+        placeholder="email"
+        value={email}
+        handleInputChange={handleChangeEmail}
       />
       <InputFieldUI
         placeholder="password"
         value={password}
         handleInputChange={handleChangePassword}
       />
-      <ButtonUI
-        title="Register"
-        handlePress={() => console.log(`${username} ${password}`)}
-      />
+      <ButtonUI title="Register" handlePress={handleCreateAccountRequest} />
       <ButtonUI title="Go to Login" handlePress={navigateToLogin} />
     </View>
   );

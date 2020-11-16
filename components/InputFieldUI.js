@@ -6,16 +6,12 @@ const { COLORS } = useTheme();
 const InputFieldUI = (props) => {
   const { value, placeholder, handleInputChange } = props;
 
-  const inputHandler = (text) => {
-    handleInputChange(text);
-  };
-
   return (
     <View style={styles.inputContainer}>
       <TextInput
         style={styles.inputField}
         value={value}
-        onChangeText={inputHandler}
+        onChangeText={handleInputChange}
         placeholder={placeholder}
       />
     </View>
