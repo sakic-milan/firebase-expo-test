@@ -1,15 +1,43 @@
 import { observable, action, makeAutoObservable } from "mobx";
 import axios from "axios";
-
 import { fetchApi } from "../helper/utils";
 import { FIREBASE_WEB_API_KEY } from "../helper/constants";
+import { registerWithEmail, logOut } from "../firebase/actions";
 
 class UserStore {
-  auth = false;
-  name = "";
+  userId = null;
+  user = null;
+  auth = true;
+  name = "Peters";
+  email = "";
   constructor() {
     makeAutoObservable(this);
   }
+
+  registerWithEmail = async (email, password) => {
+    try {
+      const response = await registerWithEmail(email, password);
+      setUser(response);
+      console.log("response", response);
+    } catch (error) {
+      this.auth = false;
+      console.log(error);
+    }
+  };
+
+  setUser(user) {
+    this.user = user;
+  }
+
+  userLogout = async () => {
+    try {
+      const response = await logOut();
+      this.auth = false;
+      console.log("response", response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   createAccount = async (email, password) => {
     const response = await axios({
