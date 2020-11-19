@@ -7,15 +7,17 @@ import useUserProfile from "./../hooks/useUserProfile";
 
 const Register = (props) => {
   const { navigation } = props;
-  const { createAccount, registerWithEmail } = useUserProfile();
+  const { registerWithEmail } = useUserProfile();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleCreateAccountRequest = async () => {
-    await registerWithEmail(email, password);
-
-    //await createAccount(email, password);
+    try {
+      await registerWithEmail(email, password);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleChangeEmail = (text) => {

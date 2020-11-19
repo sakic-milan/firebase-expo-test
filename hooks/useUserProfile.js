@@ -4,10 +4,14 @@ import { StoreContext } from "../store/AppContext";
 
 const useUserProfile = () => {
   const {
-    userStore: { user, auth, name, registerWithEmail, userLogout, setUser },
+    userStore: { user, registerWithEmail, userLogout },
   } = useContext(StoreContext);
 
-  return { user, auth, name, registerWithEmail, userLogout, setUser };
+  return {
+    user,
+    registerWithEmail,
+    userLogout,
+  };
 };
 
 export default useUserProfile;
