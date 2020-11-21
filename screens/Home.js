@@ -6,7 +6,6 @@ import useUserProfile from "../hooks/useUserProfile";
 import ButtonUI from "../components/ButtonUI";
 import { logOut } from "../firebase/actions";
 import { auth } from "../firebase/config";
-import TestPedometer from "../components/TestPedometer";
 
 const Home = () => {
   const { user, userLogout } = useUserProfile();
@@ -20,11 +19,10 @@ const Home = () => {
   };
 
   return (
-    <TestPedometer />
-    // <View>
-    //   <Text>Welcome</Text>
-    //   <ButtonUI title="Logout" handlePress={handleLogout} />
-    // </View>
+    <View>
+      <Text>Welcome</Text>
+      <ButtonUI title="Logout" handlePress={handleLogout} />
+    </View>
   );
 };
 

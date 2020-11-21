@@ -17,6 +17,7 @@ const index = () => {
     const unsubscribeAuth = auth.onAuthStateChanged(async (authUser) => {
       try {
         await (authUser ? setUser(authUser) : setUser(null));
+        console.log("authUser", authUser);
         setLoading(false);
       } catch (error) {
         console.log(error);

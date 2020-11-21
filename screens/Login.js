@@ -4,14 +4,21 @@ import useUserProfile from "./../hooks/useUserProfile";
 import { View, Text } from "react-native";
 import ButtonUI from "../components/ButtonUI";
 import InputFieldUI from "../components/InputFieldUI";
-import { loginWithEmail } from "../firebase/actions";
 
 const Login = (props) => {
   const { navigation } = props;
-  const { user } = useUserProfile();
+  const { user, loginWithEmail } = useUserProfile();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const handleLoginRequest = async () => {
+    try {
+      await loginWithEmail(email, password);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleChangeEmail = (text) => {
     setEmail(text);
@@ -19,14 +26,6 @@ const Login = (props) => {
 
   const handleChangePassword = (text) => {
     setPassword(text);
-  };
-
-  const handleLogin = async () => {
-    try {
-      const response = await loginWithEmail(email, password);
-    } catch (error) {
-      console.log(error);
-    }
   };
 
   const navigateToRegister = () => {
@@ -46,7 +45,7 @@ const Login = (props) => {
         value={password}
         handleInputChange={handleChangePassword}
       />
-      <ButtonUI title="LOGIN" handlePress={handleLogin} />
+      <ButtonUI title="LOGIN" handlePress={loginWithEmail} />
       <ButtonUI title="Create new account" handlePress={navigateToRegister} />
     </View>
   );
