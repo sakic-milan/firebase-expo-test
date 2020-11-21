@@ -20,13 +20,16 @@ const InputFieldUI = (props) => {
 
 const styles = StyleSheet.create({
   inputContainer: {
-    marginHorizontal: 15,
-    marginVertical: 20,
-    height: 70,
-    backgroundColor: "red",
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: COLORS.primary,
+    marginVertical: 15,
+    marginHorizontal: 10,
   },
   inputField: {
-    borderBottomColor: COLORS.primary,
+    borderColor: COLORS.primary,
+    height: 50,
+    paddingHorizontal: 20,
   },
 });
 

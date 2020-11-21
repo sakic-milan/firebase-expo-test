@@ -45,7 +45,7 @@ const Login = (props) => {
         value={password}
         handleInputChange={handleChangePassword}
       />
-      <ButtonUI title="LOGIN" handlePress={loginWithEmail} />
+      <ButtonUI title="LOGIN" handlePress={handleLoginRequest} />
       <ButtonUI title="Create new account" handlePress={navigateToRegister} />
     </View>
   );
