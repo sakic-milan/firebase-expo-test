@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text } from "react-native";
-
+import { auth } from "../firebase/config";
 import ButtonUI from "../components/ButtonUI";
 import InputFieldUI from "../components/InputFieldUI";
 import useUserProfile from "./../hooks/useUserProfile";
@@ -31,6 +31,19 @@ const Register = (props) => {
   const navigateToLogin = () => {
     navigation.navigate("Login");
   };
+
+  useEffect(() => {
+    var currents = firebase.auth().currentUser;
+    console.log("current", current);
+
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        console.log("user is:", user);
+        var uid = user.uid;
+      } else {
+      }
+    });
+  });
 
   return (
     <View>

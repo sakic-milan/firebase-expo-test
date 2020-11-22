@@ -15,3 +15,7 @@ export const passwordReset = (email) => {
 export const logOut = () => {
   return auth.signOut();
 };
+
+export const getCurrentUser = () => {
+  return auth.currentUser;
+};

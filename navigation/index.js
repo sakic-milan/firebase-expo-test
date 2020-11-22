@@ -10,22 +10,12 @@ import useUserProfile from "../hooks/useUserProfile";
 import { auth } from "../firebase/config";
 
 const index = () => {
-  const { user } = useUserProfile();
-  const { loading, setLoading } = useState(true);
+  const { user, setUser, getCurrentUser } = useUserProfile();
+
+  let loading = false;
 
   useEffect(() => {
-    const unsubscribeAuth = auth.onAuthStateChanged(async (authUser) => {
-      try {
-        await (authUser ? setUser(authUser) : setUser(null));
-        console.log("authUser", authUser);
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
-        // TODO: should hide loading indicator here too but show error massage
-      }
-    });
-
-    return unsubscribeAuth;
+    getCurrentUser();
   }, []);
 
   if (loading) {

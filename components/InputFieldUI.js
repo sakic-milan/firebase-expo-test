@@ -4,7 +4,7 @@ import useTheme from "../theme/useTheme";
 
 const { COLORS } = useTheme();
 const InputFieldUI = (props) => {
-  const { value, placeholder, handleInputChange } = props;
+  const { value, placeholder, handleInputChange, ...rest } = props;
 
   return (
     <View style={styles.inputContainer}>
@@ -13,6 +13,7 @@ const InputFieldUI = (props) => {
         value={value}
         onChangeText={handleInputChange}
         placeholder={placeholder}
+        {...rest}
       />
     </View>
   );

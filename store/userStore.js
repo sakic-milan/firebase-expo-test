@@ -7,6 +7,9 @@ import { auth } from "../firebase/config";
 
 class UserStore {
   user = null;
+  account = null;
+  userComments = [];
+  loading = true;
 
   constructor() {
     makeAutoObservable(this);
@@ -17,7 +20,31 @@ class UserStore {
       const response = await registerWithEmail(email, password);
       console.log("REGISTER RESPONSE >>> ", response);
       this.user = response.user.email;
+      this.account = user;
       console.log("user", this.user);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  getCurrentUser = async () => {
+    try {
+      await auth.onAuthStateChanged((authUser) => {
+        this.user = authUser;
+        this.loading = false;
+      });
+    } catch (error) {}
+  };
+
+  setUser = (user) => {
+    this.user = user;
+  };
+
+  getMyComments = async () => {
+    try {
+      fetch("https://jsonplaceholder.typicode.com/comments/")
+        .then((response) => response.json())
+        .then((comments) => (this.userComments = comments.slice(0, 20)));
     } catch (error) {
       console.log(error);
     }
